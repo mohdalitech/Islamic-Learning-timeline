@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Islamic Learning Timeline</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 shadow-sm">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <h1 class="text-2xl md:text-3xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
+                    <span data-en="Islamic Learning Timeline" data-ar="الجدول الزمني للتعلم الإسلامي">Islamic Learning Timeline</span>
+                </h1>
+                <div class="flex gap-3 items-center">
+                    <!-- Language Toggle -->
+                    <button id="langToggle" class="px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors font-semibold" aria-label="Toggle Language">
+                        <span data-en="عربي" data-ar="English">عربي</span>
+                    </button>
+                    <!-- Theme Toggle -->
+                    <button id="themeToggle" class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors" aria-label="Toggle Theme">
+                        <svg class="w-6 h-6 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                        </svg>
+                        <svg class="w-6 h-6 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Bar -->
+    <div class="container mx-auto px-4 py-4">
+        <div class="max-w-2xl mx-auto relative">
+            <input 
+                type="text" 
+                id="searchInput" 
+                placeholder="Search events..." 
+                data-en-placeholder="Search events..."
+                data-ar-placeholder="البحث عن الأحداث..."
+                class="w-full px-6 py-3 pl-12 rounded-full border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:border-green-500 dark:focus:border-green-400 transition-colors"
+            />
+            <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+            <button id="clearSearch" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 hidden">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Filter Buttons -->
+    <div class="container mx-auto px-4 py-6">
+        <div class="flex flex-wrap gap-3 justify-center items-center mb-4">
+            <button class="filter-btn active px-6 py-2 rounded-full bg-green-600 text-white hover:bg-green-700 transition-colors font-semibold" data-filter="all">
+                <span data-en="All" data-ar="الكل">All</span>
+            </button>
+            <button class="filter-btn px-6 py-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors font-semibold" data-filter="prophets">
+                <span data-en="Prophets" data-ar="الأنبياء">Prophets</span>
+            </button>
+            <button class="filter-btn px-6 py-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors font-semibold" data-filter="caliphs">
+                <span data-en="Caliphs" data-ar="الخلفاء">Caliphs</span>
+            </button>
+            <button class="filter-btn px-6 py-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors font-semibold" data-filter="scholars">
+                <span data-en="Scholars" data-ar="العلماء">Scholars</span>
+            </button>
+            <button class="filter-btn px-6 py-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors font-semibold" data-filter="battles">
+                <span data-en="Battles" data-ar="المعارك">Battles</span>
+            </button>
+            <button id="bookmarksBtn" class="px-6 py-2 rounded-full bg-amber-500 text-white hover:bg-amber-600 transition-colors font-semibold flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                </svg>
+                <span data-en="Bookmarks" data-ar="العلامات">Bookmarks</span>
+                <span id="bookmarkCount" class="bg-white/30 px-2 py-0.5 rounded-full text-xs">0</span>
+            </button>
+        </div>
+        <div id="eventCount" class="text-center text-sm text-gray-600 dark:text-gray-400 mt-2">
+            <span data-en="Showing" data-ar="عرض">Showing</span> <span id="countNumber">12</span> <span data-en="events" data-ar="حدثاً">events</span>
+        </div>
+    </div>
+
+    <!-- Timeline Container -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- Progress Bar -->
+        <div class="max-w-4xl mx-auto mb-6 hidden md:block">
+            <div class="flex justify-between items-center text-xs text-gray-500 dark:text-gray-400 mb-2">
+                <span>570 CE</span>
+                <span id="progressText" class="font-semibold text-green-600 dark:text-green-400">570 CE</span>
+                <span>1500 CE</span>
+            </div>
+            <div class="relative h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                <div id="progressBar" class="absolute left-0 top-0 h-full bg-gradient-to-r from-green-500 to-blue-500 rounded-full transition-all duration-300" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <div id="timeline" class="relative">
+            <!-- Timeline Line -->
+            <div class="absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-green-500 via-blue-500 to-green-500 dark:from-green-600 dark:via-blue-600 dark:to-green-600 transform -translate-y-1/2 hidden md:block"></div>
+            
+            <!-- Timeline Events -->
+            <div id="timelineEvents" class="relative flex flex-row md:flex-row gap-8 md:gap-12 overflow-x-auto pb-8 md:pb-0 px-4 md:px-0" style="scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;">
+                <!-- Events will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Event Detail Modal -->
+    <div id="eventModal" class="fixed inset-0 bg-black/50 dark:bg-black/70 z-50 hidden items-center justify-center p-4">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto transform transition-all duration-300 scale-95 opacity-0">
+            <div class="p-6 md:p-8">
+                <button id="closeModal" class="float-right text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 text-2xl font-bold">&times;</button>
+                <div class="clear-both">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 id="modalTitle" class="text-3xl font-bold text-green-600 dark:text-green-400"></h2>
+                        <div class="flex gap-2">
+                            <button id="bookmarkBtn" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors" aria-label="Bookmark">
+                                <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                                </svg>
+                            </button>
+                            <button id="shareBtn" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors" aria-label="Share">
+                                <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="modalContent" class="space-y-6"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
