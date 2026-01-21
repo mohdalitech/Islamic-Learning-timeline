@@ -1,0 +1,184 @@
+/* Custom Styles */
+* {
+    scroll-behavior: smooth;
+}
+
+html[dir="rtl"] {
+    direction: rtl;
+}
+
+html[dir="ltr"] {
+    direction: ltr;
+}
+
+/* Timeline Event Cards */
+.timeline-event {
+    scroll-snap-align: center;
+    min-width: 280px;
+    max-width: 320px;
+}
+
+@media (min-width: 768px) {
+    .timeline-event {
+        min-width: 300px;
+        max-width: 350px;
+    }
+}
+
+/* Smooth transitions */
+.transition-all {
+    transition: all 0.3s ease;
+}
+
+/* Modal Animation */
+#eventModal.active {
+    display: flex;
+}
+
+#eventModal.active > div {
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* Loading State */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Custom Scrollbar */
+#timelineEvents::-webkit-scrollbar {
+    height: 8px;
+}
+
+#timelineEvents::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+#timelineEvents::-webkit-scrollbar-thumb {
+    background: linear-gradient(to right, #16a34a, #2563eb);
+    border-radius: 4px;
+}
+
+#timelineEvents::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to right, #15803d, #1d4ed8);
+}
+
+/* Hover Effect */
+.hover-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-card:hover {
+    transform: translateY(-8px) scale(1.02);
+}
+
+/* Filter Active State */
+.filter-btn.active {
+    background: linear-gradient(135deg, #16a34a, #2563eb) !important;
+    color: white !important;
+}
+
+/* Fade Up Animation */
+.fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Quran Verse Styling */
+.quran-verse {
+    font-family: 'Arabic', 'Arial', sans-serif;
+    line-height: 2;
+}
+
+.quran-verse-arabic {
+    direction: rtl;
+    text-align: right;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+/* Hadith Styling */
+.hadith-text {
+    font-style: italic;
+    line-height: 1.8;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .timeline-event {
+        min-width: 250px;
+    }
+    
+    #eventModal > div {
+        max-width: 95vw;
+    }
+}
+
+/* Search Bar Focus */
+#searchInput:focus {
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+}
+
+/* Bookmark Animation */
+@keyframes bookmarkPop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
+
+#bookmarkBtn.text-amber-500 svg {
+    animation: bookmarkPop 0.3s ease;
+    fill: currentColor;
+}
+
+/* Share Button Animation */
+#shareBtn:hover svg {
+    transform: rotate(15deg);
+    transition: transform 0.2s ease;
+}
+
+/* Progress Bar Animation */
+#progressBar {
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Search Clear Button */
+#clearSearch:hover {
+    transform: rotate(90deg);
+    transition: transform 0.2s ease;
+}
+
+/* Bookmarks Count Badge */
+#bookmarkCount {
+    min-width: 20px;
+    text-align: center;
+}
+
+/* Event Count Animation */
+#eventCount {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Print styles */
+@media print {
+    #themeToggle,
+    #langToggle,
+    .filter-btn,
+    #searchInput,
+    #bookmarksBtn,
+    #progressText {
+        display: none;
+    }
+}
